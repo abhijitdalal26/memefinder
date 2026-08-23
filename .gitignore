@@ -32,6 +32,32 @@ search/test_catalog.json
 .paddlex/
 *.part
 
+# local-only / debug (not needed for Colab)
+AGENT.md
+_patch_collector.py
+_patch_note.txt
+_check_meta.py
+_sizes.py
+debug_collect.py
+debug_collect2.py
+test_arctic.py
+test_9gag.html
+analyze_postmeta.py
+audit.py
+backfill_metadata.py
+bootstrap_curated.py
+curate.py
+fetch_postmeta.py
+fold_orphans.py
+main.py
+run_collection.py
+validate.py
+collect_comments.py
+collect_templates.py
+collect_to_target.py
+collect_target.log
+collect_target.lock
+
 # temp
 1.26.0
 -p/
