@@ -1,0 +1,37 @@
+# venv / caches
+.venv/
+__pycache__/
+*.pyc
+*.pyo
+.pytest_cache/
+.mypy_cache/
+
+# data - large, lives on Drive
+data/
+curated_metadata.json
+metadata.json
+ocr_cache.json
+curated_metadata.json.tmp
+
+# collection runtime
+collect_target.log
+collect_target.lock
+collect_target.run.out
+collection.log
+collection.err.log
+collect_target.err
+config/seen_*.json
+config/postmeta.json
+
+# generated indexes
+search/index/
+search/test_index/
+search/test_catalog.json
+
+# paddle / HF caches
+.paddlex/
+*.part
+
+# temp
+1.26.0
+-p/
