@@ -74,18 +74,35 @@ Env vars: `MAKEMEME_ROOT`, `MAKEMEME_IMAGES`, `MAKEMEME_CATALOG`, `MAKEMEME_OCR`
 
 `python search/smoke_test.py` — network-free wiring check (no models needed).
 
-## Project Layout
+## Models
 
-```
-config/settings.py              # env-overridable paths + model names
-pipeline/download_images.py     # fetch image_url -> IMAGES_DIR (concurrent, resumable)
-pipeline/ocr.py                 # PaddleOCR 3.x (predict API, enable_mkldnn=False on CPU)
-search/build_index.py           # embed title+sub+category+OCR -> vectors.npy + memes.json
-search/retrieve.py              # MemeSearcher: cosine recall + cross-encoder rerank
-search/app.py                   # Gradio Gallery UI
-search/cli.py                   # CLI search
-colab/makememe.ipynb            # Colab notebook
-```
+| Model | Use | Size |
+|-------|-----|------|
+| `BAAI/bge-large-en-v1.5` | Text embeddings (1024-d, `BGE_QUERY_PREFIX` for queries) | ~1.3 GB |
+| `BAAI/bge-reranker-v2-m3` | Cross-encoder reranking of top 30 → top 6 | ~2.2 GB |
+| `PaddleOCR 3.x` (`PP-OCRv6` det + rec + `PP-LCNet` orientation) + `paddlepaddle 3.3` | OCR meme captions | auto-downloaded on first run |
+
+All models cached in HF Hub / `.paddlex` — no manual download needed.
+
+## Files
+
+| File | What it does |
+|------|--------------|
+| `config/settings.py` | All env-overridable paths (`MAKEMEME_*`) + `EMBED_MODEL`/`RERANK_MODEL` |
+| `pipeline/download_images.py` | Downloads `image_url` → `IMAGES_DIR/curated/<sub>/` (threaded, skips existing) |
+| `pipeline/ocr.py` | Runs PaddleOCR on each image → `ocr_cache.json` (batched, resumable) |
+| `search/build_index.py` | Builds `search_doc = title + sub + category + OCR` → `vectors.npy` + `memes.json` |
+| `search/retrieve.py` | `MemeSearcher` — embeds query, cosine recall, reranks |
+| `search/app.py` | Gradio UI — textbox → gallery of 6 memes |
+| `search/cli.py` | CLI — `python -m search.cli "your query"` |
+| `search/smoke_test.py` | Offline wiring test with dummy embeddings |
+| `colab/makememe.ipynb` | Colab notebook (9 runnable cells) |
+| `COLAB_COMMANDS.md` | Same commands as flat markdown (1 block = 1 cell) |
+| `requirements.txt` | `requests`, `Pillow`, `sentence-transformers`, `gradio`, `paddleocr` |
+
+## What’s on GitHub
+
+Only the 25 pipeline files above are tracked. Large/debug files stay local (`.gitignore`): `data/`, `curated_metadata.json`, `collect_*.py`, `debug_*`, `_patch_*`, `AGENT.md`, logs, `.venv`, `.paddlex`, `search/index/`.
 
 ## Notes
 
