@@ -19,7 +19,7 @@ drive.mount('/content/drive')
 
 ```python
 %cd /content
-REPO_URL = "https://github.com/YOUR_USERNAME/MakeMeMeme.git"  # <-- edit this
+REPO_URL = "https://github.com/abhijitdalal26/memefinder.git"  # <-- edit this
 import os
 if not os.path.exists("/content/MakeMeMeme"):
     !git clone {REPO_URL}
