@@ -62,6 +62,11 @@ collect_target.lock
 curated_images.zip
 *.zip
 
+# kaggle upload staging (13 GB; pushed via kaggle CLI, not git)
+kaggle_upload/
+collect_target.run.err
+collect_watchdog.log
+
 # temp
 1.26.0
 -p/

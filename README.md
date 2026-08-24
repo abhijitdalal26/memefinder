@@ -1,6 +1,6 @@
 # MemeFinder — Text-to-Meme Retrieval
 
-Describe a meme in words, get the best matches. Built on 24k+ curated Reddit memes with OCR + `bge-large` embeddings + `bge-reranker` + Gradio.
+Describe a meme in words, get the best matches. Built on 52k+ curated Reddit memes with OCR + `bge-large` embeddings + `bge-reranker` + Gradio.
 
 ## Pipeline (verified end-to-end on 12 images, 2026-08-23)
 
@@ -57,6 +57,22 @@ if not os.path.exists("/content/MakeMeMeme"):
 /MyDrive/MakeMeMeme/curated_metadata.json
 /MyDrive/MakeMeMeme/data/curated/<sub>/<image>.jpg
 ```
+
+## Kaggle Dataset (GPU training)
+
+The full curated corpus is on Kaggle as [`abhijitdalal26/memesdataset`](https://www.kaggle.com/datasets/abhijitdalal26/memesdataset) — 52k+ memes across 21 subreddits plus `curated_metadata.json`. Currently **private**; flip **Settings → Public** to share.
+
+In a Kaggle notebook (GPU) it auto-mounts at `/kaggle/input/memesdataset`:
+
+```python
+%env MAKEMEME_CATALOG=/kaggle/input/memesdataset/curated_metadata.json
+%env MAKEMEME_IMAGES=/kaggle/input/memesdataset
+!python pipeline/ocr.py        # OCR captions -> ocr_cache.json
+!python search/build_index.py  # bge-large embeddings
+!python -m search.app
+```
+
+The `memes` subreddit is split into `memes_1/`, `memes_2/`, `memes_3/` (Kaggle per-file cap); merge them into a single `memes/` folder before running. Staging/upload config: `kaggle_upload/dataset-metadata.json` + `kaggle_upload/README.md` (gitignored).
 
 ## Local Run
 
