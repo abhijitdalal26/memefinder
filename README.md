@@ -90,7 +90,7 @@ All models cached in HF Hub / `.paddlex` — no manual download needed.
 |------|--------------|
 | `config/settings.py` | All env-overridable paths (`MAKEMEME_*`) + `EMBED_MODEL`/`RERANK_MODEL` |
 | `pipeline/download_images.py` | Downloads `image_url` → `IMAGES_DIR/curated/<sub>/` (threaded, skips existing) |
-| `pipeline/ocr.py` | Runs PaddleOCR on each image → `ocr_cache.json` (batched, resumable) |
+| `pipeline/ocr.py` | Runs PaddleOCR on each image → `ocr_cache.json` (batched, resumable, strips `imgflip.com`/`mematic` watermarks, `conf>=0.5` filter, whitespace cleaning) |
 | `search/build_index.py` | Builds `search_doc = title + sub + category + OCR` → `vectors.npy` + `memes.json` |
 | `search/retrieve.py` | `MemeSearcher` — embeds query, cosine recall, reranks |
 | `search/app.py` | Gradio UI — textbox → gallery of 6 memes |
