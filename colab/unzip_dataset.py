@@ -18,7 +18,11 @@ import shutil
 import zipfile
 from pathlib import Path
 
-# ---- config (edit DRIVE_ZIP_PATH to match where you uploaded the zip) ----
+# ---- config ----
+# On the laptop this zip lives at:
+#   H:\My Drive\MakeMeMeme\curated_images.zip
+# which Drive for desktop syncs to the "MyDrive/MakeMeMeme" folder. When Colab
+# mounts Drive at /content/drive, that same file is at the path below.
 DRIVE_ZIP_PATH = "/content/drive/MyDrive/MakeMeMeme/curated_images.zip"
 LOCAL_ZIP_PATH = "/content/curated_images.zip"
 # Destination images root; the zip's "curated/" folder is extracted underneath it.
