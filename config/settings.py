@@ -10,37 +10,63 @@ KNOWYOURMEME_DATA_DIR = DATA_DIR / "knowyourmeme"
 IMGFLIP_DATA_DIR = DATA_DIR / "imgflip"
 
 REDDIT_SUBREDDITS = [
-    # core meme subs (highest volume)
-    "memes", "dankmemes", "me_irl", "AdviceAnimals",
-    "wholesomememes", "PrequelMemes", "HistoryMemes",
-    "ProgrammerHumor", "Animemes", "MinecraftMemes",
-    # gen-z / shitpost tier
-    "shitposting", "okbuddyretard", "ComedyNecrophilia",
-    "surrealmemes", "BoneHurtingJuice", "comedyheaven",
-    "terriblefacebookmemes", "starterpacks", "196",
-    # niche / topic memes
-    "gamingmemes", "animememes", "dankchristianmemes",
-    "physicsmemes", "mathmemes", "chemistrymemes",
-    "bioniclememes", "lotrmemes", "sequelmemes",
-    "OTmemes", "OTMemesAndPrequels", "StarWarsMemes",
-    "marvelmemes", "DC_Cinematic", "spidermanmemes",
-    "pokemonmemes", "BikiniBottomTwitter", "SpongebobMemes",
-    "simpsonsshitposting", "southparkmemes",
-    # format / template subs
+    # tier 1: biggest general-purpose meme hubs (most recognized)
+    "memes", "dankmemes", "me_irl", "meirl", "2meirl4meirl",
+    "wholesomememes", "funny", "AdviceAnimals", "shitposting",
+    "MemeEconomy", "memesopdidnotlike", "dogelore", "HolUp",
+    # tier 2: twitter/facebook screenshot humor (top searched formats)
+    "WhitePeopleTwitter", "BlackPeopleTwitter", "NonPoliticalTwitter",
+    "ScottishPeopleTwitter", "IrishPeoplesTwitter", "tumblr", "teenagers",
+    "insanepeoplefacebook", "oldpeoplefacebook", "forwardsfromgrandma",
+    # tier 3: political humor (highest raw post volume)
+    "PoliticalHumor", "trump", "politicalmemes", "conservativememes",
+    "libertarianmemes", "LeopardsAteMyFace", "MurderedByWords",
+    "antiwork", "ABoringDystopia", "LateStageCapitalism",
+    # tier 4: mainstream gaming & fandom
+    "gaming", "pcmasterrace", "nintendo", "PrequelMemes", "HistoryMemes",
+    "marvelmemes", "spidermanmemes", "harrypotter", "gameofthrones",
+    "freefolk", "pokemonmemes", "MinecraftMemes", "BikiniBottomTwitter",
+    "SpongebobMemes", "simpsonsshitposting", "southparkmemes",
+    "ProgrammerHumor", "doctorwho",
+    # tier 5: classic formats & relatable
+    "starterpacks", "therewasanattempt", "Unexpected", "facepalm",
+    "MadeMeSmile", "EyeBleach", "WatchPeopleDieInside",
+    "KidsAreFuckingStupid", "suspiciouslyspecific", "confidentlyincorrect",
+    "iamverysmart", "iam14andthisisdeep", "LostRedditor", "InstantRegret",
+    "terriblefacebookmemes", "comedyheaven", "BoneHurtingJuice",
+    "surrealmemes", "ComedyNecrophilia", "okbuddyretard",
+    # template sources (essential: canonical blank formats)
     "MemeTemplatesOfficial", "memesoundless", "BlankTemplatesForMemes",
-    # reaction / relatable
-    "reactionpictures", "reactionsformats", "relatablememes",
-    "teenagers", "tumblr", "WhitePeopleTwitter",
-    "BlackPeopleTwitter", "therewasanattempt", "Unexpected",
-    "facepalm", "Cringetopia", "cringepics",
-    # animal / wholesome
-    "catmemes", "dogmemes", "wholesomeanimemes", "MadeMeSmile",
 ]
+
+# niche tail: crawled ONLY if the 50k target isn't reached by the mainstream
+# list above (collector processes in order and stops at target)
+REDDIT_SUBREDDITS_NICHE = [
+    "animememes", "Animemes", "wholesomeanimemes", "catmemes", "dogmemes",
+    "gamingmemes", "DC_Cinematic", "StarWarsMemes", "lotrmemes",
+    "sequelmemes", "OTmemes", "OTMemesAndPrequels", "dankchristianmemes",
+    "physicsmemes", "mathmemes", "chemistrymemes", "sciencememes",
+    "engineeringmemes", "spacememes", "bioniclememes",
+    "reactionpictures", "reactionsformats", "relatablememes",
+    "Cringetopia", "cringepics", "196",
+    "pcgaming", "playstation", "xbox", "nintendomemes", "GamingCirclejerk",
+    "GamingDetails", "destinythegame", "techsupportmemes",
+    "TalesFromTechSupport", "okbuddybaka", "okbuddyvicodin",
+    "okbuddychicanery", "okbuddylmao", "traaaaaaannnnnnnnnns",
+    "gaybrosofbattlefront", "marveltv", "meirlformeirl", "okbuddyholly",
+    "ABCDesis", "GenZ", "zoomers", "theocho", "pointlessindecision",
+    "wheredidthesodago", "englishpeopletwitter", "welcometothelldome",
+    "comics", "webcomics", "funnycomics", "comicsans", "formemers",
+]
+
+REDDIT_SUBREDDITS = REDDIT_SUBREDDITS + REDDIT_SUBREDDITS_NICHE
 
 # per-subreddit image cap for a full run
 REDDIT_MAX_PER_SUB = 3000
 # don't go older than this when walking history back
-REDDIT_DATE_FLOOR = "2023-01-01"
+# extended from 2023 -> 2018 to unlock years of untapped meme history
+# (the 2023 floor had exhausted every sub at only ~24.7k of the 50k target)
+REDDIT_DATE_FLOOR = "2018-01-01"
 
 # ---------------------------------------------------------------------------
 # CURATED mode: the subreddits that actually teach a model "how memes work"

@@ -58,6 +58,10 @@ collect_to_target.py
 collect_target.log
 collect_target.lock
 
+# dataset archive for Drive upload (too big for git; built via scripts/build_images_zip.py)
+curated_images.zip
+*.zip
+
 # temp
 1.26.0
 -p/
